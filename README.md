@@ -36,15 +36,18 @@ Chrome-utvidelse & Arc Boost som tar bort smerten av å lese nettinnhold fra de 
 
 Utvidelsen kan benyttes på alle chromium-baserte nettlesere (som Chrome, Vivaldi, Arc, Brave, Opera m.fl.). Som nevnt til testing og foreløpig ikke tilgjengeliggjort i Chrome Webshop, og må derfor installeres manuelt på følgende vis:
 
-1. Åpne Chrome (eller annen Chromium-basert nettleser) og gå til menyen for utvidelser: chrome://extensions/[^1].
+#### Installasjon · Chrome
+1. Åpne Chrome (eller annen Chromium-basert nettleser) og gå til menyen for utvidelser: [chrome://extensions/](vivaldi://extensions/)[^1].
 2. Skru på 'Developer Mode' øverst i høyre hjørne.
 3. I enkelte versjoner av Chrome kan du laste ned [reNorsk.crx](https://github.com/oeeve/reNorsk/raw/main/Chrome%20Extension/reNorsk.crx) (Chromium Extension) og dra/slippe denne rett i chrome://extensions/.
 4. Hvis dette ikke går, laster du ned [reNorsk.zip](https://github.com/oeeve/reNorsk/raw/main/Chrome%20Extension/reNorsk.zip) (evt. endrer filnavn på .crx til .zip), og pakker ut.
 5. Velg 'Load unpacked' fra menyen øverst til venstre, og velg mappen du pakket ut fra .zip-filen (reNorsk/).
 6. Du kan nå skru av 'Developer Mode'.
-7. Bruk: Benytt enten knappen fra utvidelsesikonet (rN), eller Cmd+Shift+Y[^2] når du måtte komme over en tekst som bare er publisert på nynorsk, for å 'rette' denne til norsk.
 
 ![Demo Install](readme/demo_install.gif)
+
+#### Bruk · Chrome
+Benytt enten knappen fra utvidelsesikonet (rN), eller Cmd+Shift+Y[^2] når du måtte komme over en tekst som bare er publisert på nynorsk, for å 'rette' denne til norsk.
 
 #### Nedlastinger · Chrome
 
@@ -57,11 +60,14 @@ Utvidelsen kan benyttes på alle chromium-baserte nettlesere (som Chrome, Vivald
 
 ### Arc Boost
 
+#### Installasjon · Arc Boost
 1. Last ned Arc Browser (https://arc.net).
-2. Åpne: arc://boost/, eller Cmd+T og skriv 'New Legacy Boost (Advanced)'[^3].
+2. Åpne: [arc://boost/](arc://boost/), eller Cmd+T og skriv 'New Legacy Boost (Advanced)'[^3].
 3. Velg 'Replace' og 'All Websites'.
 4. Kopier og lim inn følgende [JavaScript](Arc%20Boost/v0.3/content.js) til content.js.
-5. Bruk Cmd+Ctrl+R[^4] når du måtte komme over en tekst som bare er publisert på nynorsk, for å 'rette' denne til norsk.
+   
+#### Bruk · Arc Boost
+Trykk Cmd+Ctrl+R[^4] når du måtte komme over en tekst som bare er publisert på nynorsk, for å 'rette' denne til norsk.
 
 #### Nedlastinger · Arc Boost
 
