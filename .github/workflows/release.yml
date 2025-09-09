@@ -86,6 +86,8 @@ jobs:
         run: |
           VERSION="${{ needs.check-version.outputs.new_version }}"
           
+          echo "${{ secrets.EXTENSION_KEY }}" > extension-key.pem
+          
           # Install crx3 for creating CRX files
           npm install -g crx3
           
