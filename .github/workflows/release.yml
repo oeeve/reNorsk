@@ -16,6 +16,7 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       new_version: ${{ steps.version_check.outputs.new_version }}
+      previous_version: ${{ steps.version_check.outputs.previous_version }}
       release_exists: ${{ steps.check_release.outputs.release_exists }}
     steps:
       - name: Checkout code
@@ -23,13 +24,18 @@ jobs:
         with:
           fetch-depth: 2
 
-      - name: Get current version from manifest.json
+      - name: Get compare versions from manifest.json and previous release
         id: version_check
         run: |
           # Get current version from manifest.json
           CURR_VERSION=$(jq -r '.version' manifest.json)
           echo "Current version: $CURR_VERSION"
           echo "new_version=$CURR_VERSION" >> $GITHUB_OUTPUT
+
+          # Get previous version from the previous release
+          PREV_VERSION=$(gh release view --json tagName --jq '.tagName' v$CURR_VERSION)
+          echo "Previous version: $PREV_VERSION"
+          echo "previous_version=$PREV_VERSION" >> $GITHUB_OUTPUT
 
       - name: Check if release already exists
         id: check_release
@@ -67,6 +73,20 @@ jobs:
           echo "${{ secrets.EXTENSION_KEY }}" > extension-key.pem
           ls -la .
           npm run build
+      
+      - name: Generate changelog
+        id: changelog
+        run: |
+          VERSION="${{ needs.check-version.outputs.new_version }}"
+          PREV_VERSION="${{ needs.check-version.outputs.previous_version }}"
+          echo "## Changes in v$VERSION" > CHANGELOG.md
+          echo "" >> CHANGELOG.md
+          echo "### Commits since v$PREV_VERSION:" >> CHANGELOG.md
+          git log --oneline "v$PREV_VERSION"..HEAD --grep="^(?!Merge)" >> CHANGELOG.md 2>/dev/null || true
+          echo "" >> CHANGELOG.md
+          echo "### Installation" >> CHANGELOG.md
+          echo "- Download the \`reNorsk-v$VERSION.zip\` file for manual installation" >> CHANGELOG.md
+          echo "- Or download the \`reNorsk-v$VERSION.crx\` file for direct installation (may require developer mode)" >> CHANGELOG.md
 
       - name: Create GitHub Release
         id: create_release
