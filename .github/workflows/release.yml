@@ -63,44 +63,10 @@ jobs:
         run: npm ci
 
       - name: Build extension
-        run: npm run build
-
-      - name: Create CRX file
         run: |
-          VERSION="${{ needs.check-version.outputs.new_version }}"
-          
           echo "${{ secrets.EXTENSION_KEY }}" > extension-key.pem
-          
-          # Install crx3 for creating CRX files
-          npm install -g crx3
-          
-          # Create CRX file from the dist directory
-          crx3 dist "packed/reNorsk-v$VERSION.crx"
-          
-          echo "Created: reNorsk-v$VERSION.crx"
-
-      - name: Generate changelog
-        id: changelog
-        run: |
-          VERSION="${{ needs.check-version.outputs.new_version }}"
-          PREV_VERSION="${{ needs.check-version.outputs.previous_version }}"
-          
-          echo "## Changes in v$VERSION" > CHANGELOG.md
-          echo "" >> CHANGELOG.md
-          
-          # Get commits since last version tag (if it exists)
-          if git tag | grep -q "v$PREV_VERSION"; then
-            echo "### Commits since v$PREV_VERSION:" >> CHANGELOG.md
-            git log --oneline "v$PREV_VERSION"..HEAD --grep="^(?!Merge)" >> CHANGELOG.md 2>/dev/null || true
-          else
-            echo "### Recent commits:" >> CHANGELOG.md
-            git log --oneline -10 >> CHANGELOG.md
-          fi
-          
-          echo "" >> CHANGELOG.md
-          echo "### Installation" >> CHANGELOG.md
-          echo "- Download the \`reNorsk-v$VERSION.zip\` file for manual installation" >> CHANGELOG.md
-          echo "- Or download the \`reNorsk-v$VERSION.crx\` file for direct installation (may require developer mode)" >> CHANGELOG.md
+          ls -la .
+          npm run build
 
       - name: Create GitHub Release
         id: create_release
@@ -112,8 +78,8 @@ jobs:
           draft: false
           prerelease: false
           files: |
-            packed/reNorsk-v${{ needs.check-version.outputs.new_version }}.zip
-            packed/reNorsk-v${{ needs.check-version.outputs.new_version }}.crx
+            ChromeExtension/v3/reNorsk-v${{ needs.check-version.outputs.new_version }}.zip
+            ChromeExtension/v3/reNorsk-v${{ needs.check-version.outputs.new_version }}.crx
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -122,6 +88,6 @@ jobs:
           VERSION="${{ needs.check-version.outputs.new_version }}"
           echo "🎉 Successfully created release v$VERSION"
           echo "📦 Assets created:"
-          ls -la packed/
+          ls -la ChromeExtension/v3/
           echo ""
           echo "🔗 Release URL: ${{ steps.create_release.outputs.html_url }}"
