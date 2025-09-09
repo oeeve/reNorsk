@@ -1,0 +1,61 @@
+import { defineConfig } from 'vite'
+import { crx, defineManifest } from '@crxjs/vite-plugin'
+
+const manifest = defineManifest({
+  manifest_version: 3,
+  name: 'reNorsk',
+  version: '1.1.2',
+  description: 'Retter aktive nettside fra nynorsk til Norsk, for økt leseglede.',
+  permissions: [
+    'activeTab',
+    'scripting'
+  ],
+  host_permissions: [
+    'https://www.apertium.org/*'
+  ],
+  background: {
+    service_worker: 'src/background.js'
+  },
+  action: {
+    default_title: 'reNorsk: Retter nynorsk til Norsk (bokmål) (Cmd/Ctrl+Shift+Y)',
+    default_icon: {
+      '16': 'src/images/icon16.png',
+      '32': 'src/images/icon32.png',
+      '48': 'src/images/icon48.png',
+      '128': 'src/images/icon128.png'
+    }
+  },
+  commands: {
+    correct_page: {
+      suggested_key: {
+        default: 'Ctrl+Shift+Y',
+        mac: 'Command+Shift+Y'
+      },
+      description: 'Retter aktive nettside fra nynorsk til Norsk, for økt leseglede.'
+    }
+  },
+  icons: {
+    '16': 'src/images/icon16.png',
+    '32': 'src/images/icon32.png',
+    '48': 'src/images/icon48.png',
+    '128': 'src/images/icon128.png'
+  }
+})
+
+export default defineConfig({
+  plugins: [
+    crx({ manifest })
+  ],
+  build: {
+    outDir: 'dist',
+    emptyOutDir: true
+  },
+  server: {
+    port: 5173,
+    strictPort: true,
+    hmr: {
+      port: 5173
+    }
+  }
+})
+

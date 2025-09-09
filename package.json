@@ -1,0 +1,27 @@
+{
+  "name": "renorsk-chrome-extension",
+  "version": "1.1.1",
+  "description": "Retter aktive nettside fra nynorsk til Norsk, for økt leseglede.",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "pack": "npm run build && web-ext build --source-dir=dist --artifacts-dir=packed",
+    "build-and-pack": "node scripts/build-and-pack.js",
+    "clean": "rimraf dist packed"
+  },
+  "devDependencies": {
+    "@crxjs/vite-plugin": "^2.2.0",
+    "vite": "^7.1.5",
+    "web-ext": "^8.9.0"
+  },
+  "keywords": [
+    "chrome-extension",
+    "norwegian",
+    "nynorsk",
+    "translation"
+  ],
+  "author": "Omar S",
+  "license": "MIT"
+}
