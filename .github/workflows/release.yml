@@ -34,8 +34,9 @@ jobs:
           echo "Current version: $CURR_VERSION"
           echo "new_version=$CURR_VERSION" >> $GITHUB_OUTPUT
 
-          # Get previous version from the previous release
-          PREV_VERSION=$(gh release view --json tagName --jq '.tagName' v$CURR_VERSION)
+          # Get previous version from the previous release using gh cli
+          PREV_VERSION=$(gh release list --limit 2 --json tagName --jq '.[1].tagName' 2>/dev/null)
+
           echo "Previous version: $PREV_VERSION"
           echo "previous_version=$PREV_VERSION" >> $GITHUB_OUTPUT
 
