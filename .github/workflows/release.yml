@@ -5,6 +5,7 @@ on:
     branches:
       - main
     paths:
+      - '.github/workflows/release.yml'
       - 'manifest.json'
   workflow_dispatch: {}
 
@@ -78,7 +79,7 @@ jobs:
         env:
           EXTENSION_KEY: ${{ secrets.EXTENSION_KEY }}
         run: |
-          echo $EXTENSION_KEY > extension-key.pem
+          echo $EXTENSION_KEY | base64 -d > extension-key.pem
           npm run build
       
       - name: Generate changelog
