@@ -72,6 +72,12 @@ jobs:
           node-version: '22'
           cache: 'npm'
 
+      - name: create new git tag for the new version
+        run: |
+          VERSION="${{ needs.check-version.outputs.new_version }}"
+          git tag "v$VERSION"
+          git push origin "v$VERSION"
+
       - name: Install dependencies
         run: npm ci
 
@@ -89,12 +95,12 @@ jobs:
           PREV_VERSION="${{ needs.check-version.outputs.previous_version }}"
           echo "## Changes in v$VERSION" > CHANGELOG.md
           echo "" >> CHANGELOG.md
-          echo "### Commits since v$PREV_VERSION:" >> CHANGELOG.md
-          git log --oneline "v$PREV_VERSION"..HEAD --grep="^(?!Merge)" >> CHANGELOG.md 2>/dev/null || true
+          echo "### Commits since $PREV_VERSION:" >> CHANGELOG.md
+          git log --oneline "$PREV_VERSION"..HEAD --grep="^(?!Merge)" >> CHANGELOG.md 2>/dev/null || true
           echo "" >> CHANGELOG.md
           echo "### Installation" >> CHANGELOG.md
-          echo "- Download the \`reNorsk-v$VERSION.zip\` file for manual installation" >> CHANGELOG.md
-          echo "- Or download the \`reNorsk-v$VERSION.crx\` file for direct installation (may require developer mode)" >> CHANGELOG.md
+          echo "- Download the \`reNorsk.zip\` file for manual installation" >> CHANGELOG.md
+          echo "- Or download the \`reNorsk.crx\` file for direct installation (may require developer mode)" >> CHANGELOG.md
 
       - name: Create GitHub Release
         id: create_release
