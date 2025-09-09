@@ -78,8 +78,8 @@ jobs:
           draft: false
           prerelease: false
           files: |
-            ChromeExtension/v3/reNorsk-v${{ needs.check-version.outputs.new_version }}.zip
-            ChromeExtension/v3/reNorsk-v${{ needs.check-version.outputs.new_version }}.crx
+            ChromeExtension/v3/reNorsk.zip
+            ChromeExtension/v3/reNorsk.crx
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
