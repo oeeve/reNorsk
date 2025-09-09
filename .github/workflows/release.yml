@@ -26,6 +26,8 @@ jobs:
 
       - name: Get compare versions from manifest.json and previous release
         id: version_check
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: |
           # Get current version from manifest.json
           CURR_VERSION=$(jq -r '.version' manifest.json)
