@@ -82,36 +82,15 @@ jobs:
       - name: Build extension
         run: npm run build
 
-      - name: Create packed directory
-        run: mkdir -p packed
-
-      - name: Package extension with web-ext
-        run: |
-          # Install web-ext globally to ensure it's available
-          npm install -g web-ext
-          
-          # Create zip package
-          web-ext build --source-dir=dist --artifacts-dir=packed --overwrite-dest
-          
-          # Rename the generated zip to a more predictable name
-          VERSION="${{ needs.check-version.outputs.new_version }}"
-          cd packed
-          ZIP_FILE=$(ls *.zip | head -n 1)
-          if [ -n "$ZIP_FILE" ]; then
-            mv "$ZIP_FILE" "reNorsk-v$VERSION.zip"
-            echo "Created: reNorsk-v$VERSION.zip"
-          fi
-
       - name: Create CRX file
         run: |
           VERSION="${{ needs.check-version.outputs.new_version }}"
-          cd packed
           
           # Install crx3 for creating CRX files
           npm install -g crx3
           
           # Create CRX file from the dist directory
-          crx3 ../dist "reNorsk-v$VERSION.crx"
+          crx3 dist "packed/reNorsk-v$VERSION.crx"
           
           echo "Created: reNorsk-v$VERSION.crx"
 
