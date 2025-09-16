@@ -35,14 +35,17 @@ Chrome-utvidelse & Arc Boost som tar bort smerten av å lese nettinnhold fra de 
 
 
 ### Forbehold
-- Tidlig test / 'Proof of Concept'. Programmet gjør jobben, men enkelte feil må påregnes. Foreløpig ikke publisert i Chrome Webshop. Se installasjonsveiledning under.
+- Tidlig test / 'Proof of Concept'. Programmet gjør jobben, men enkelte feil må påregnes
+- Publisert i Chrome Nettmarked for enkel installasjon (<a href="#chrome"><strong>Chrome utvidelse</strong></a>).
+- Se installasjonsveiledning (<a href="#installasjon"><strong>Installasjon (dev)</strong></a>) om du ønsker å teste den i dev-mode.
 - Benytter Apertiums åpne API (https://wiki.apertium.org/) for maskinoversettelse og er underlagt deres ToS.
 
 
 <a name="chrome"></a>
 
 ## Chrome Utvidelse
-**TBA**. Lenke til chrome nettmarked tilgjengeliggjøres så snart utvidelsen er godkjent og publisert (sist oppdatert 08.09.2025).
+
+[![Available in Chrome Web Store](readme/webstore.png)](https://chromewebstore.google.com/detail/renorsk/loeeebdalbgeickefjicohfnmhnmklde)
 
 
 <a name="installasjon"></a>
@@ -50,7 +53,7 @@ Chrome-utvidelse & Arc Boost som tar bort smerten av å lese nettinnhold fra de 
 ## Installasjon
 ### Chrome-utvidelse
 
-Utvidelsen kan benyttes på alle chromium-baserte nettlesere (som Chrome, Vivaldi, Arc, Brave, Opera m.fl.). Tilgjengeliggjøres snart i Chrome Nettmarked (TBA), men kan også installeres manuelt på følgende vis:
+Utvidelsen kan benyttes på alle chromium-baserte nettlesere (som Chrome, Vivaldi, Arc, Brave, Opera m.fl.). Tilgjengeliggjort i Chrome Nettmarked for enkel installasjon (<a href="#chrome"><strong>Chrome utvidelse</strong></a>), men kan også installeres manuelt på følgende vis:
 
 
 #### Installasjon · Chrome
